@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Advertise My House</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'ad-assets/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'ad-assets/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'ad-assets/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'ad-assets/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'ad-assets/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            
+            <div class="card card-4">
+                <div class="card-body">
+                    <p style="color: red;">{{msg}}</p>
+                    <h2 class="title">Advertise Details</h2>
+                    <form method="POST" action="{% url 'advertise' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Advertise for</label>
+                                    <select name="ad_type" class="form-control" required style="border: 2px solid rgb(161, 15, 149);">
+                                        <option>--</option>
+                                        <option value="Sell">Sell</option>
+                                        <option value="Rent">Rent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Price</label>
+                                    <input class="input--style-4" type="text" name="ad_price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Description</label>
+                                    <div class="input-group-icon">
+                                        <textarea name="ad_des" id="" cols="72.5" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label for="">Add Image 1</label>
+                                    <input type="file" name="ad_image1" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+                                </div>
+
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label for="">Add Image 2</label>
+                                    <input type="file" name="ad_image2" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label for="">Add Image 3</label>
+                                    <input type="file" name="ad_image3" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label for="">Add Image 4</label>
+                                    <input type="file" name="ad_image4" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'ad-assets/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'ad-assets/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'ad-assets/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'ad-assets/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'ad-assets/js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

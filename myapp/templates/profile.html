@@ -1,0 +1,73 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block nav %}
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Profile</h6>
+        </nav>
+{% endblock %}
+        
+
+{% block content %}
+
+<div class="container-fluid px-2 px-md-4">
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+      <span class="mask  bg-gradient-primary  opacity-6"></span>
+    </div>
+    <div class="card card-body mx-3 mx-md-4 mt-n6">
+      <div class="row gx-4 mb-2">
+        <div class="col-auto">
+          <div class="avatar avatar-xl position-relative">
+            <img src="{{uid.pic.url}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+          </div>
+        </div>
+        <div class="col-auto my-auto">
+          <div class="h-100">
+            <h5 class="mb-1">
+              {{uid.fname}} {{uid.lname}}
+            </h5>
+          </div>
+        </div>
+        <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-6 ">
+              <label for="">First Name</label>
+              <input type="text" name="fname" value="{{uid.fname}}" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+            </div>
+            <div class="col-6 ">
+              <label for="">Last Name</label>
+              <input type="text" name="lname" value="{{uid.lname}}" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 ">
+              <label for="">Mobile</label>
+              <input type="tel" name="mobile" value="{{uid.mobile}}" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+            </div>
+            <div class="col-6 ">
+              <label for="">Email</label>
+              <input type="email" name="email" value="{{uid.email}}" disabled class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 ">
+              <label for="">Address</label>
+              <textarea name="address" id="" cols="30" rows="10" class="form-control" style="border: 2px solid rgb(173, 44, 163);">{% if uid.address %} {{uid.address}}{% endif %} </textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Profile Picture</label>
+              <input type="file" name="pic" class="form-control" style="border: 2px solid rgb(173, 44, 163);">
+            </div>
+          </div>
+          <button class="btn btn-primary col-2"> <i class="fa fa-edit"></i>Edit Profile</button>
+        </form>
+        </div>
+    </div>
+  </div>
+{% endblock %}

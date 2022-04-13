@@ -1,0 +1,80 @@
+{% extends 'header1.html'%}
+{% load static%}
+{% block content %}
+
+<p>{{msg}}</p>
+<div class="container-fluid">
+
+    <form action="{% url 'house-details' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+            <label for="">First Name</label>
+            <input type="text" name="fname" value="{{umid.fname}}" class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+        </div>
+        <div class="col-6">
+            <label for="">Last Name</label>
+            <input type="text" name="lname" value="{{umid.lname}}" class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 ">
+          <label for="">Mobile</label>
+          <input type="tel" name="mobile" value="{{umid.mobile}}" class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+        </div>
+        <div class="col-6 ">
+          <label for="">Email</label>
+          <input type="email" name="email" value="{{umid.email}}" disabled class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-4 ">
+          <label for="">Lane</label>
+          <input type="text" name="lane" value="{{umid.lane}}" disabled class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+      <div class="col-4 ">
+          <label for="">House No</label>
+          <input type="text" name="hno" value="{{umid.house_no}}" disabled  class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+      <div class="col-4 ">
+          <label for="">Residence Type</label>
+          <input type="text" name="rtype" value="{{umid.residence_type}}" disabled  class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-6 ">
+          <label for="">Document Type</label>
+          <input type="text" name="dtype" value="{{umid.doc_type}}" class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+      <div class="col-6 ">
+          <label for="">Document Id</label>
+          <input type="text" name="did" value="{{umid.doc_id}}" class="form-control" style="border: 2px solid rgb(33, 93, 204);">
+      </div>
+  </div>
+  <br>
+  <button class="btn btn-primary col-2"> <i class="fa fa-edit"></i>Edit House Details</button>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     
+              </div>
+          </div>
+        </div>
+
+{% endblock %}

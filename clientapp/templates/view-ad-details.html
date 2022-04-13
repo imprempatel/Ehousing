@@ -1,0 +1,107 @@
+{% extends 'header1.html'%}
+{% load static %}
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>House Details</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="about-img">
+                    <img src="{{details.ad_image1.url}}" height="350" width="350" alt="Image">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="about-img">
+                    <img src="{{details.ad_image2.url}}" height="350" width="350" alt="Image">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <div class="about-img">
+                    <img src="{{details.ad_image3.url}}" height="350" width="350" alt="Image">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="about-img">
+                    <img src="{{details.ad_image4.url}}" height="350" width="350" alt="Image">
+                </div>
+            </div>
+        </div>
+    
+            <div class="card">
+                <div class="about-text">
+                    <p> 
+                        <h4>
+                            <b>
+                                
+                                House No: {{details.member.lane}} {{details.member.house_no}}</p>
+                            </b>
+                        </h4>
+                    </p>
+                    <p> 
+                        <h4>
+                            <b>
+                                
+                                Owner Name: {{details.member.fname}} {{details.member.lname}}</p>
+                            </b>
+                        </h4>
+                    </p>
+                    <p>
+                        <h4>
+                            <b>
+
+                                Ad Type: For {{details.ad_type}}
+                            </b>
+                        </h4>
+                    </p>
+                    <p>
+                        <h4>
+                            <b>
+
+                                Amount: <i style="font-size:24px" class="fa">&#xf156;</i>{{details.ad_price}}
+                            </b>
+                        </h4>
+                    </p>
+                    <p>
+                        <h4>
+                            <b>
+                                Desciption: {{details.ad_des}}
+                            </b>
+                        </h4>
+                    </p>
+                    <p>
+                        <h4>
+                            <b>
+
+                                Contact No: {{details.member.mobile}}
+                            </b>
+                        </h4>
+                    </p>
+                    <p>
+                        <h4>
+                            <b>
+
+                                Email: {{details.member.email}}
+                            </b>
+                        </h4>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- About End -->
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block nav %}
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Events</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Events</h6>
+        </nav>
+{% endblock %}
+    {% block content %}
+    <div class="row">
+        <form action="{% url 'events' %}" method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-6">
+              <label for="">Event Name</label>
+              <input type="text" name="ename" class="form-control" id="" style="border: 2px solid rgb(161, 15, 149);">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Event Date</label>
+              <input type="date" name="edate" class="form-control" style="border: 2px solid rgb(161, 15, 149);">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Event Venue</label>
+              <input type="text" name="evenue" class="form-control"  style="border: 2px solid rgb(161, 15, 149);">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Event Description</label>
+              <textarea name="edes" id="" cols="30" rows="10" class="form-control" style="border: 2px solid rgb(161, 15, 149);"></textarea>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-primary"><i class="fa fa-pen"></i> Add Event</button>
+        </form>
+            </div>
+
+
+    {% endblock %}
