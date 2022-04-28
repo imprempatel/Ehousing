@@ -1,0 +1,45 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block nav %}
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Complaints</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">View in Detail</h6>
+        </nav>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <form action="{% url 'view-complaint' complaint.id %}" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-6">
+          <label for="">Complaint Subject</label>
+          <input type="text" name="cname" value="{{complaint.subject}}" disabled class="form-control" id="" style="border: 2px solid rgb(161, 15, 149);">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="">Claimant</label>
+          <input type="text" name="evenue" value="{{complaint.member.fname}} {{complaint.member.lname}}" disabled class="form-control"  style="border: 2px solid rgb(161, 15, 149);">
+        </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="">Date</label>
+          <input type="text" name="evenue" value="{{complaint.cdate}}" class="form-control" disabled style="border: 2px solid rgb(161, 15, 149);">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="">Description</label>
+          <textarea name="edes" id="" cols="30" rows="10" disabled class="form-control" style="border: 2px solid rgb(161, 15, 149);">{{complaint.des}}</textarea>
+        </div>
+      </div>
+      <br>
+    </form>
+</div>
+
+{% endblock %}

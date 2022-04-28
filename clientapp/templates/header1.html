@@ -21,34 +21,32 @@
         <link href="{% static 'client-assets/css/style.css' %}" rel="stylesheet">
         <link href="{% static 'client-assets/css/custom.css' %}" rel="stylesheet">
 
+        <!-- Alerts -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         {% block style %}
 
         {% endblock %}
     </head>
 
     <body>
+        
         <div class="wrapper">
             <!-- Header Start -->
             <div class="container-fluid">
             <div class="header home">
                     <div class="header-top row align-items-center">
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                             <div id="aheader">
                                     <h1>
                                         Smart-Society 
                                     </h1>
                             </div>
                         </div>
-                        <div class="col-lg-9">
-                            <div class="topbar">
-                                <div class="nav-item dropdown">
-                                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="bi bi-person-fill"></i> {{umid.fname}} {{umid.lname}}</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'house-details' %}" class="dropdown-item">My House Details</a>
-                                        <a href="{% url 'change-member-password' %}" class="dropdown-item">Change Password</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-7">
+                            
                             <div class="navbar navbar-expand-lg bg-light navbar-light">
                                 <a href="#" class="navbar-brand">MENU</a>
                                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -57,14 +55,34 @@
 
                                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                     <div class="navbar-nav ml-auto">
-                                        <a href="{% url 'client-index' %}" class="nav-item nav-link active">Home</a>
-                                        <a href="{% url 'house-details' %}" class="nav-item nav-link">My House Details</a>
-                                        <a href="{% url 'change-member-password' %}" class="nav-item nav-link">Change Password</a>
-                                        <a href="portfolio.html" class="nav-item nav-link">Maintenance</a>
+                                        {% block member_index %}
+                                        <a href="{% url 'client-index' %}" class="nav-item nav-link">Home</a>
+                                        {% endblock %}
+
+                                        {% block maintenance %}
+                                        <a href="{% url 'maintenance' %}" class="nav-item nav-link">Maintenance</a>
+                                        {% endblock %}
+
+                                        {% block advertise %}
                                         {% if umid.residence_type == "Owner" %}
                                         <a href="{% url 'advertise' %}" class="nav-item nav-link">Advertise My House</a>
                                         {% endif %}
-                                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                        {% endblock %}
+
+                                        {% block complaint %}
+                                        <a href="{% url 'complaint' %}" class="nav-item nav-link">Complaint</a>
+                                        {% endblock %}
+                                        
+                                        {% block dropdown %}
+                                            <div class="nav-item dropdown">
+                                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="bi bi-person-fill"></i> {{umid.fname}} {{umid.lname}}</a>
+                                                <div class="dropdown-menu">
+                                                    <a href="{% url 'house-details' %}" class="dropdown-item">My House Details</a>
+                                                    <a href="{% url 'change-member-password' %}" class="dropdown-item">Change Password</a>
+                                                    <a href="{% url 'member-logout' %}" class="dropdown-item">Logout</a>
+                                                </div>
+                                            </div>
+                                        {% endblock %} 
                                     </div>
                                 </div>
                             </div>
@@ -99,10 +117,10 @@
                   <div class="f-menu">
                       <a href="{% url 'client-index' %}">Home</a>
                       <a href="{% url 'advertise' %}">Advertise My House</a>
-                      <a href="">Maintenance</a>
+                      <a href="{% url 'maintenance' %}">Maintenance</a>
+                      <a href="{% url 'complaint' %}">Complaint</a>
                       <a href="{% url 'house-details' %}">My House Details</a>
                       <a href="{% url 'change-member-password' %}">Change Password</a>
-                      <a href="">Contact us</a>
                   </div>
               </div>
               <div class="container copyright">
@@ -132,6 +150,17 @@
 
       <!-- Template Javascript -->
       <script src="{% static 'client-assets/js/main.js' %}"></script>
+      
+
+
+      <!-- Alerts -->
+      <script>
+          window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+      </script>
       {% block footerjs %}
 
       {% endblock %}

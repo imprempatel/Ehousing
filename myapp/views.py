@@ -1,6 +1,8 @@
 import email
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from clientapp.views import maintenance
 from .models import *
 from clientapp.models import *
 from random import choices, randrange
@@ -11,21 +13,33 @@ from clientapp.models import *
 
 def index(request):
     try:
+        count = 0
+        owner = 0
+        tenant = 0
+        mid= Member.objects.all()
+        for i in mid:
+            count = count+1
+            if i.residence_type == 'Owner':
+                owner = owner+1
+            else:
+                tenant = tenant+1
         uid = User.objects.get(email=request.session['email'])
-        return render(request,'index.html',{'uid':uid})
+        event = Event.objects.all()
+        complaint = Complaint.objects.all()
+        return render(request,'index.html',{'uid':uid,'count':count,'owner':owner,'tenant':tenant,'event':event,'complaint':complaint})
     except:
         return render(request,'sign-in.html',{'msg':'Session has expired'})
 
 def sign_in(request):
     if request.method == 'POST':
-        try:
+        # try:
             uid = User.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['email'] = request.POST['email']
                 return redirect('index')
             return render(request,'sign-in.html',{'msg':'Pasword is incorrect'})
-        except:
-            return render(request,'sign-in.html',{'msg':'Acccount does not exists'})
+        # except:
+        #     return render(request,'sign-in.html',{'msg':'Acccount does not exists'})
     return render(request,'sign-in.html')
 
 def sign_up(request):
@@ -155,3 +169,69 @@ def events(request):
         )
         return render(request,'events.html',{'uid':uid,'msg':'Event has been Added'})
     return render(request,'events.html',{'uid':uid})
+
+
+def edit_event(request,pk):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        event = Event.objects.get(id=pk)
+        if request.method == 'POST':
+            event.ename = request.POST['ename']
+            event.edate = request.POST['edate']
+            event.evenue = request.POST['evenue']
+            event.edes = request.POST['edes']
+            event.save()
+        return render(request,'edit-event.html',{'event':event,'uid':uid})
+    except:
+        return redirect('index')
+
+def delete_event(request,pk):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        Event.objects.get(id=pk).delete()
+        return redirect('index')
+    except:
+        return redirect('index')
+
+def view_complaint(request,pk):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        complaint = Complaint.objects.get(id=pk)
+        return render(request,'view-complaint.html',{'uid':uid,'complaint':complaint})
+    except:
+        return redirect('index')
+
+def resolve_complaint(request,pk):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        complaint = Complaint.objects.get(id=pk)
+        complaint.status = True
+        complaint.save()
+        return redirect('index')
+    except:
+        return redirect('index')
+
+def view_maintenance(request):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        maintenance = Maintenance.objects.all()
+        return render(request,'view-maintenance.html',{'uid':uid,'maintenance':maintenance})
+    except:
+        return render(request,'view-maintenance.html',{'uid':uid,'maintenance':maintenance})
+
+def search_maintenance(request):
+    uid = User.objects.get(email = request.session['email'])
+    try:
+        if request.method == 'POST':
+            search = request.POST['search']
+            try:
+                member = Maintenance.objects.filter(
+                    member__email = search,
+                    member__verify = True
+                )
+                return render(request,'view-maintenance.html',{'uid':uid,'member':member})
+            except:
+                maintenance = Maintenance.objects.all()
+                return render(request,'view-maintenance',{'uid':uid,'maintenance':maintenance,'msg':'No match Found'})
+    except:
+        return redirect('view-maintenance')

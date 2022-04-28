@@ -10,7 +10,18 @@
         </nav>
 {% endblock %}
         
+{% block profile%}
 
+<li class="nav-item">
+  <a class="nav-link text-white active bg-gradient-primary" href="{% url 'profile' %}">
+    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+      <i class="material-icons opacity-10">person</i>
+    </div>
+    <span class="nav-link-text ms-1">Profile</span>
+  </a>
+</li>
+
+{% endblock %}
 {% block content %}
 
 <div class="container-fluid px-2 px-md-4">
@@ -24,13 +35,13 @@
             <img src="{{uid.pic.url}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
           </div>
         </div>
-        <div class="col-auto my-auto">
+        <!-- <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
               {{uid.fname}} {{uid.lname}}
             </h5>
           </div>
-        </div>
+        </div> -->
         <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">

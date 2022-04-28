@@ -1,3 +1,5 @@
 .container-login100{
     background: url('../images/bg-01.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }

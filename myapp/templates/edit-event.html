@@ -1,0 +1,37 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <form action="{% url 'edit-event' event.id %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-6">
+            <label for="">Event Name</label>
+            <input type="text" name="ename" value="{{event.ename}}" required class="form-control" id="" style="border: 2px solid rgb(161, 15, 149);">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Event Date</label>
+            <input type="date" name="edate" required class="form-control" value="{{event.edate}}" style="border: 2px solid rgb(161, 15, 149);">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Event Venue</label>
+            <input type="text" name="evenue" required class="form-control" value="{{event.evenue}}"  style="border: 2px solid rgb(161, 15, 149);">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Event Description</label>
+            <textarea name="edes" id="" cols="30" rows="10" required class="form-control" style="border: 2px solid rgb(161, 15, 149);">{{event.edes}}</textarea>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-primary"><i class="fa fa-pen"></i> Edit Event</button>
+      </form>
+</div>
+
+{% endblock %}

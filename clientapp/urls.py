@@ -8,4 +8,9 @@ urlpatterns = [
     path('change-member-password/',views.change_member_password,name='change-member-password'),
     path('advertise/',views.advertise,name='advertise'),
     path('view-ad-details/<int:pk>',views.ad_details,name='view-ad-details'),
+    path('complaint/',views.complaint,name='complaint'),
+    path('maintenance/',views.maintenance,name='maintenance'),
+    path('member-logout/',views.member_logout,name='member-logout'),
+    path('maintenance/paymenthandler/<int:pk>', views.paymenthandler, name='paymenthandler'),
+    # path('book-club-hall/',views.book_club_hall,name='book-club-hall'),
 ]

@@ -1,3 +1,5 @@
+from pickle import TRUE
+from tkinter import CASCADE
 from django.db import models
 from myapp.models import User
 
@@ -38,3 +40,22 @@ class Club(models.Model):
     def __str__(self):
        return self.member.email
 
+class Complaint(models.Model):
+    member = models.ForeignKey(Member,on_delete=models.CASCADE)
+    cdate = models.DateField(null = True)
+    subject = models.CharField(max_length=50)
+    des = models.TextField()
+    status = models.BooleanField(default=False)
+    def __str__(self):
+        return self.member.email
+
+class Maintenance(models.Model):
+    choice = [('January','January'),('February','February'),('March','March'),('April','April'),('May','May'),('June','June'),('July','July'),('August','August'),('September','September'),('October','October'),('November','November'),('December','December')]
+    member = models.ForeignKey(Member,on_delete=models.CASCADE)
+    payment_date = models.DateField()
+    month = models.CharField(max_length=20,choices=choice)
+    year = models.IntegerField()
+    pay_id = models.CharField(max_length=50)
+    verify = models.BooleanField(default=False)
+    def __str__(self):
+        return self.member.email

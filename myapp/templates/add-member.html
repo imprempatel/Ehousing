@@ -9,6 +9,19 @@
           <h6 class="font-weight-bolder mb-0">Add Member</h6>
         </nav>
 {% endblock %}
+{% block addmember %}
+        <li class="nav-item">
+          <a class="nav-link text-white active  bg-gradient-primary" href="{% url 'add-member' %}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Add Member</span>
+          </a>
+        </li>
+        {% endblock %}
+
+
+
 
 {% block content %}
 
@@ -18,18 +31,18 @@
     </div>
     <div class="card card-body mx-3 mx-md-4 mt-n6">
       <div class="row gx-4 mb-2">
-        <div class="col-auto">
+        <!-- <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
             <img src="{{uid.pic.url}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
           </div>
-        </div>
-        <div class="col-auto my-auto">
+        </div> -->
+        <!-- <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
               {{uid.fname}} {{uid.lname}}
             </h5>
           </div>
-        </div>
+        </div> -->
         <form action="{% url 'add-member' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">

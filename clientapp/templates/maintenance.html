@@ -1,10 +1,125 @@
 {% extends 'header1.html'%}
 {% load static %}
+
+
+{% block maintenance %}
+<a href="{% url 'maintenance' %}" class="nav-item nav-link active">Maintenance</a>
+{% endblock %}
+
+{% block search %}
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label">Type here...</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+{% endblock %}
+
 {% block content %}
+{% if msg is not None %}
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           {{msg}}
+          </div>
+{% endif %}
+<div class="faqs">
+    <div class="container">
+        <div class="col-md-5">
+            <div class="section-header left">
+                <p>Pay Your Maintenance Here</p>
+            </div>
+            <img src="https://assets-news.housing.com/news/wp-content/uploads/2019/07/02110316/GST-rates-applicable-to-maintenance-charges-of-housing-societies-FB-1200x700-compressed.jpg" alt="Image">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="myform">
+                            <form action="{% url 'maintenance' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <p>Maintenance For:</p>
+                                </div>
+                                <div class="row">
+                                    <label for="Month">Month</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="month">
+                                        <option>--</option>
+                                        <option value="January">January</option>
+                                        <option value="February">February</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="October">October</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
+                                      </select>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label for="year">Year</label>
+                                    <input type="number" name="year" class="form-control" value="2022">
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-flash"></i> Proceed To payment </button>                                            
+                                </div>
+                            </form>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-
-
+<div class="blog">
+    <div class="container">
+        <div class="section-header">
+            <p>Maintenance Payment History</p>
+        </div>
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Payment Date</th>
+                        <th>Paid for Month/Year</th>
+                        <th>Payment ID</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for one in maintenance_detail %}
+                    <tr>
+                        <td>{{one.member.fname}} {{one.member.lname}}</td>
+                        <td>{{one.payment_date}}</td>
+                        <td>{{one.month}}/{{one.year}}</td>
+                        <td>{{one.pay_id}}</td>
+                        {% if one.verify %}
+                        <td>Completed</td>
+                        {% else %}
+                        <td>Failed</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

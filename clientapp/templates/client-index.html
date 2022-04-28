@@ -1,6 +1,10 @@
 {% extends 'header1.html'%}
 {% load static %}
 
+{% block member_index %}
+<a href="{% url 'client-index' %}" class="nav-item nav-link active">Home</a>
+{% endblock %}
+
 {% block style %}
 <style>
     input[type=text], select {
@@ -45,9 +49,17 @@
 {% endblock %}
 
 {% block content %}
+
             <!-- Service Start -->
-        <p><h3 style="color: red;">{{msg}}</h3></p>
+        <!-- <p><h3 style="color: red;">{{msg}}</h3></p> -->
+        {% if date is not None%}
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           {{msg}}
+          </div>
+        {% endif %}
             <div class="service">
+                <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="service-item">
@@ -78,6 +90,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
             <!-- Service End -->
             <div class="service">
                 <div class="container">
@@ -124,12 +138,12 @@
                                             {% csrf_token %}
                                             <div class="row">
                                                 <label for="Date">Booking Date</label>
-                                                <input type="date" name="date">
+                                                <input type="date" required name="date">
                                             </div>
                                             <div class="row">
                                                 
                                                 <label for="purpose">Booking Purpose</label>
-                                                <input type="text" name="purpose" placeholder="Eg. Birthday Party..">
+                                                <input type="text" required name="purpose" placeholder="Eg. Birthday Party..">
                                             </div>                                            
                                             <input type="submit" value="Book Now">
                                         </form>
@@ -152,7 +166,7 @@
             <div class="price">
                 <div class="container">
                     <div class="section-header">
-                        <p>Party House Booking Details</p>
+                        <p>Party Hall Booking Details</p>
                     </div>
                     <div class="row">
                         {% for one in club %}
@@ -163,7 +177,7 @@
                                         <i class="fa fa-home"></i>
                                     </div>
                                     <div class="price-title">
-                                        <h2>Party House</h2>
+                                        <h2>Party Hall</h2>
                                     </div>
                                     <div class="price-pricing">
                                         <h3>Date: {{one.date}}</h3> 
@@ -213,4 +227,7 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Complaint Form -->
+            
 {% endblock %}

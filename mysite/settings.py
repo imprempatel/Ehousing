@@ -134,3 +134,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'wearesvmitian@gmail.com'
 EMAIL_HOST_PASSWORD = 'mysweetfamily'
+
+
+RAZOR_KEY_ID = 'rzp_test_lO81k3HlYui4FW'
+RAZOR_KEY_SECRET = 'Yaj2omXPAnzwrBWwBA75R8v4'
